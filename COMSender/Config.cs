@@ -13,6 +13,8 @@ public class Config
 meta: false
 ";
 
+    public static string lightIp = "192.168.44.60";
+
     public static void Initialize()
     {
         if (!File.Exists(configFile))

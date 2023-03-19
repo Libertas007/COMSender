@@ -30,6 +30,7 @@ namespace COMSender
     class ComSender
     {
         static SerialPort port = new SerialPort();
+        private static readonly HttpClient client = new HttpClient();
         
         public static void Main(string[] args)
         {
@@ -51,6 +52,12 @@ namespace COMSender
             if (command == "setup")
             {
                 Setup();
+                Environment.Exit(0);
+            }
+
+            if (command == "night")
+            {
+                NightMode();
                 Environment.Exit(0);
             }
             
@@ -87,6 +94,13 @@ namespace COMSender
                     break;
 
             }
+        }
+
+        static void NightMode()
+        {
+            AllOff();
+            ChangeBar(7, Color.OFF, Effects.LIGHT);
+            client.GetAsync($"http://{Config.lightIp}/night");
         }
 
         static void Setup()
