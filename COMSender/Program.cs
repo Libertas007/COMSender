@@ -48,9 +48,45 @@ namespace COMSender
             port.BaudRate = 115200;
             port.Handshake = Handshake.None;
 
-            Setup();
-            SendCommand(command);
+            if (command == "setup")
+            {
+                Setup();
+                Environment.Exit(0);
+            }
             
+            Config.Initialize();
+            bool meta = Config.IsMetaPressed();
+            
+            int id = int.Parse(command);
+
+            switch (id)
+            {
+                case 0:
+                    Actions.RunActionKey0(meta);
+                    break;
+                case 1:
+                    Actions.RunActionKey1(meta);
+                    break;
+                case 2:
+                    Actions.RunActionKey2(meta);
+                    break;
+                case 3:
+                    Actions.RunActionKey3(meta);
+                    break;
+                case 4:
+                    Actions.RunActionKey4(meta);
+                    break;
+                case 5:
+                    Actions.RunActionKey5(meta);
+                    break;
+                case 6:
+                    Actions.RunActionKey6(meta);
+                    break;
+                case 7:
+                    Actions.RunActionKey7(meta);
+                    break;
+
+            }
         }
 
         static void Setup()
